@@ -11,4 +11,12 @@ public class GudownRepository {
 	public void getAllGudowns() {
 		gService.getAllGudowns();
 	}
+	
+	public void getGudownStock() {
+		gService.getGudownStock();
+	}
+	
+	public void searchStockByGudownId() {
+		gService.searchStockByGudownId();
+	}
 }

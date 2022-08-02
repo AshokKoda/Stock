@@ -24,6 +24,7 @@ public class GudownService implements IGudown {
 		connection = dbConnection.getConnection();
 	}
 
+	@Override
 	public void addGudown() {
 		System.out.println("------------------- ADD NEW GUDOWN -------------------");
 		sc = new Scanner(System.in);
@@ -54,6 +55,7 @@ public class GudownService implements IGudown {
 		System.out.println("<------------------------------------------------------->");
 	}
 
+	@Override
 	public List<Gudown> getAllGudowns() {
 		System.out.println("------------------- GET ALL GUDOWNS -------------------");
 		try {
@@ -68,7 +70,7 @@ public class GudownService implements IGudown {
 				gudown.setgCapacity(rs.getInt("gcapacity"));
 				list.add(gudown);
 			}
-			
+
 			if (list.isEmpty()) {
 				System.out.println("No records found!");
 			} else {
@@ -80,7 +82,7 @@ public class GudownService implements IGudown {
 					System.out.println("<--------------------------------------------------->");
 				});
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println("Exception: " + e.getMessage());
 		}
@@ -88,13 +90,71 @@ public class GudownService implements IGudown {
 
 	}
 
+	@Override
 	public void updateGudown(Gudown updateGudown) {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public void deleteGudown(Gudown deleteGudown) {
 		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void getGudownStock() {
+		System.out.println("------------------- GET ALL GUDOWN STOCK -------------------");
+		try {
+			PreparedStatement ps = connection.prepareStatement(Common.GET_GUDOWN_STOCK);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				System.out.println("Stock: " + rs.getString(1));
+				System.out.println("Gudown: " + rs.getString(2));
+				System.out.println("Location: " + rs.getString(3));
+				System.out.println("Capacity: " + rs.getString(4));
+				System.out.println("---------------------------------------------------------");
+			}
+		} catch (SQLException e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
+
+	}
+
+	@Override
+	public void searchStockByGudownId() {
+		System.out.println("------------------- Search Stock By GudownId -------------------");
+
+		try {
+			PreparedStatement fetch = connection.prepareStatement(Common.FETCH);
+			ResultSet rs = fetch.executeQuery();
+
+			while (rs.next()) {
+				System.out.println(rs.getInt(1) + "." + rs.getString(2));
+			}
+		} catch (SQLException e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
+
+		sc = new Scanner(System.in);
+		System.out.println("Enter gudown-ID to search : ");
+		int id = sc.nextInt();
+
+		try {
+			String GET_STOCK_BY_GUDOWN = "select stock.name, gudowns.gname from stock INNER JOIN gudowns on stock.gid = gudowns.gid where stock.gid = '" + id + "';";
+			PreparedStatement ps = connection.prepareStatement(GET_STOCK_BY_GUDOWN);
+			ResultSet rsSearch = ps.executeQuery();
+
+			while (rsSearch.next()) {
+				System.out.println("Stock: " + rsSearch.getString(1));
+				System.out.println("Gudownd: " + rsSearch.getString(2));
+				System.out.println("---------------------------------------------------------");
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
 
 	}
 }

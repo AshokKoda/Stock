@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import com.example.gudown.Gudown;
 import com.example.stock.IStock;
 import com.example.stock.Stock;
 
@@ -15,15 +17,16 @@ public class StockService implements IStock {
 	static Scanner sc;
 	static DBConnection dbConnection;
 	List<Stock> list;
+	List<Gudown> gudownList;
 	Connection connection;
 
 	public StockService() {
 		this.list = new ArrayList<Stock>();
+		this.gudownList = new ArrayList<Gudown>();
 		dbConnection = DBConnection.init();
 		connection = dbConnection.getConnection();
 	}
 
-	@Override
 	public void addStock() {
 		System.out.println("------------------- ADD NEW GUDOWN -------------------");
 		sc = new Scanner(System.in);
@@ -33,7 +36,7 @@ public class StockService implements IStock {
 			System.out.println("Enter stock name: ");
 			String stockName = sc.nextLine();
 			ps.setString(1, stockName);
-
+			
 			System.out.println("Select gudowns: ");
 			PreparedStatement fetch = connection.prepareStatement(Common.FETCH);
 			ResultSet rs = fetch.executeQuery();
@@ -43,7 +46,17 @@ public class StockService implements IStock {
 			}
 
 			System.out.println("Enter the ID for storing the stock: ");
-			/// Write logic
+			int id = sc.nextInt();
+			Gudown gud = new Gudown();
+			if(gud.getgId() == id) {
+				gudownList.add(gud);
+			}
+			ps.setInt(2, id);
+			
+			System.out.println("Enter the units: ");
+			int units = sc.nextInt();
+			ps.setInt(3, units);
+
 
 			int status = ps.executeUpdate();
 			if (status > 0) {
@@ -59,7 +72,6 @@ public class StockService implements IStock {
 
 	}
 
-	@Override
 	public List<Stock> getAllStock() {
 		System.out.println("------------------- GET ALL STOCKS -------------------");
 		try {

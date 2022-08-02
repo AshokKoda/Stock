@@ -10,10 +10,11 @@ public class StockMain {
 		System.out.println("************** Welcome to stock management system ************** ");
 
 		StockMain main = new StockMain();
+		GudownRepository gRepo = new GudownRepository();
 
 		boolean exit = false;
 		while (!exit) {
-			System.out.println("1.STOCK\t 2.GUDOWN\t 0.Exit");
+			System.out.println(" 1.STOCK\n 2.GUDOWN\n 3.GET ALL GUDOWN STOCK\n 4.SEARCH STOCKS BY GUDOWNS\n 0.Exit");
 			System.out.println("------- Select the options -------");
 			sc = new Scanner(System.in);
 			int option = sc.nextInt();
@@ -24,6 +25,12 @@ public class StockMain {
 				break;
 			case 2:
 				main.gudownManagement();
+				break;
+			case 3:
+				gRepo.getGudownStock();
+				break;
+			case 4:
+				gRepo.searchStockByGudownId();
 				break;
 			case 0:
 				exit = true;
@@ -54,6 +61,8 @@ public class StockMain {
 				stockRepo.addStock();
 				break;
 			case 0:
+				exit = true;
+				System.out.println("You are exit!.");
 				break;
 			default:
 				System.out.println("Invalid option, please try again.");

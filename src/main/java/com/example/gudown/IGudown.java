@@ -11,4 +11,8 @@ public interface IGudown {
 	public void updateGudown(Gudown updateGudown);
 
 	public void deleteGudown(Gudown deleteGudown);
+	
+	public void getGudownStock();
+	
+	public void searchStockByGudownId();
 }

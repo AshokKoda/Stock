@@ -11,4 +11,8 @@ public class GudownRepository {
 	public void getAllGudowns() {
 		gService.getAllGudowns();
 	}
+	
+	public void getGudownsStock() {
+		gService.getGudownStock();
+	}
 }

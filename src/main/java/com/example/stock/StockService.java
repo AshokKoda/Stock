@@ -15,7 +15,6 @@ public class StockService implements IStock {
 		this.list = new ArrayList<Stock>();
 	}
 	
-	@Override
 	public void addStock() {
 		System.out.println("------------------- ADD NEW GUDOWN -------------------");
 		Stock stock = new Stock();
@@ -50,7 +49,6 @@ public class StockService implements IStock {
 		
 	}
 
-	@Override
 	public List<Stock> getAllStock() {
 		if (list.isEmpty()) {
 			System.out.println("No records found!");
@@ -64,13 +62,11 @@ public class StockService implements IStock {
 		return list;
 	}
 
-	@Override
 	public void updateStock(Stock updateStock) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void deleteStock(Stock deleteStock) {
 		// TODO Auto-generated method stub
 		

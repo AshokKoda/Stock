@@ -59,4 +59,16 @@ public class GudownService implements IGudown {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void getGudownStock() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void searchStockByGudownId() {
+		// TODO Auto-generated method stub
+		
+	}
 }

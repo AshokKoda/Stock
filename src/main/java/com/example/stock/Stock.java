@@ -5,6 +5,7 @@ public class Stock {
 	private int stockId;
 	private String stockName;
 	private int gudownList;
+	private int units;
 
 	public int getStockId() {
 		return stockId;
@@ -30,9 +31,18 @@ public class Stock {
 		this.gudownList = gudownList;
 	}
 
+	public int getUnits() {
+		return units;
+	}
+
+	public void setUnits(int units) {
+		this.units = units;
+	}
+
 	@Override
 	public String toString() {
-		return "Stock [stockId=" + stockId + ", stockName=" + stockName + ", gudownList=" + gudownList + "]";
+		return "Stock [stockId=" + stockId + ", stockName=" + stockName + ", gudownList=" + gudownList + ", units="
+				+ units + "]";
 	}
 
 }
